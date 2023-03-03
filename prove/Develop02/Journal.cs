@@ -51,4 +51,5 @@ class Journal
             Console.WriteLine(line);
         }
     }
+
 }

@@ -9,6 +9,7 @@ class Program
         int menuUserInput = 0;
 
         Journal journal = new Journal();
+        JournalReminder reminder = new JournalReminder();
         
 
         List<string> menu = new List<string>
@@ -18,7 +19,8 @@ class Program
                 "2. Display",
                 "3. Load",
                 "4. Save",
-                "5. Quit",
+                "5. Write Later",
+                "6. Quit",
                 "Your number: "
             };
 
@@ -44,6 +46,10 @@ class Program
                     journal.SaveToTXT();
                     break;
                 case 5:
+                    reminder.Start();
+                    Console.ReadLine();
+                    break;
+                case 6:
                     Console.WriteLine("See you tomorrow!");
                     break;
                 default:
