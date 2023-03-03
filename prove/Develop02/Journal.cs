@@ -6,6 +6,9 @@ class Journal
 {
     public List <Entry> _entries = new List<Entry>();
 
+    public string _userFileName;
+    public List<string> _journalEntries = new List<string>();
+
     public void CreateJournalEntry()
     {
         Entry newEntry = new Entry();
@@ -37,19 +40,15 @@ class Journal
 
     public void LoadFromTXT()
     {
-        _entries.Clear();
         Console.WriteLine("What file's name would you like to load");
-        string fileName = Console.ReadLine();
-        string[] lines = System.IO.File.ReadAllLines(fileName);
+        string userInput = Console.ReadLine();
+        _userFileName = userInput + ".txt";
+        string[] journalLines = File.ReadAllLines(_userFileName);
 
-            foreach (string line in lines)
-            {  
-                Entry AllData = new Entry();
-                string[] parts = line.Split(" -");
-                AllData._date = parts[0];
-                AllData._prompt = parts[1];
-                AllData._answer = parts[2];
-                _entries.Add(AllData);
-            }
+
+        foreach (string line in journalLines)
+        {  
+            Console.WriteLine(line);
+        }
     }
 }

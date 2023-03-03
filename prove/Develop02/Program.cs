@@ -13,7 +13,7 @@ class Program
 
         List<string> menu = new List<string>
             {
-                "Please enter a number:",
+                "\nPlease enter a number:",
                 "1. Write",
                 "2. Display",
                 "3. Load",
