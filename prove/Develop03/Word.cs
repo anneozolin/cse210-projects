@@ -1,36 +1,36 @@
 class Word
 {
-    private string wordString;
-    private bool hidden;
+    private string _wordString;
+    private bool _hidden;
 
     public Word(string wordString)
     {
-        this.wordString = wordString;
-        hidden = false;
+        this._wordString = wordString;
+        _hidden = false;
     }
 
     public bool Hidden
     {
         get
         {
-            return hidden;
+            return _hidden;
         }
     }
 
     public void Hide()
     {
-        hidden = true;
+        _hidden = true;
     }
 
     public override string ToString()
     {
-        if (hidden)
+        if (_hidden)
         {
             return "_____";
         }
         else
         {
-            return wordString;
+            return _wordString;
         }
     }
 }

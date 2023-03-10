@@ -1,14 +1,14 @@
 class Reference
 {
-    private string referenceString;
+    private string _referenceString;
 
     public Reference(string referenceString)
     {
-        this.referenceString = referenceString;
+        this._referenceString = referenceString;
     }
 
     public override string ToString()
     {
-        return referenceString;
+        return _referenceString;
     }
 }

@@ -16,7 +16,7 @@ class Program
         while (true)
         {
             // prompt the user to press enter or quit
-            Console.WriteLine("\nPress enter to hide some words or type 'quit' to exit...");
+            Console.WriteLine("\nPress enter key to hide some words or type 'quit' to exit...");
             string input = Console.ReadLine();
 
             if (input.ToLower() == "quit")
