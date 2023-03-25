@@ -1,18 +1,34 @@
+using static System.Console;
+using System.IO;
+
 public class SimpleGoal : Goal
 {
-    protected bool _complete = false;
-
-    public SimpleGoal()
+    public SimpleGoal() 
+    : base()
     {
-        
+    }
+
+    public SimpleGoal(string name, string description)
+    : base(name, description)
+    {
 
     }
 
-
-    public override string SaveFile()
+    public override void RecordEvent()
     {
-         
-        return $" Simple Goal - {_name} - ({_description}) - {_points} - {_complete} ";
-    
+        base._completed = true;
+    }
+
+    public override void GetGoalList1(int number)
+    {
+        string mark_X = "";
+        if (base._completed)
+        mark_X = "X";
+        WriteLine($"{number}. [{mark_X}] {base._name} ({base._description})");
+    }
+
+    public override string SaveGoal() 
+    {
+        return $"Simple Goal:{base._name},{base._description},{base._points},{base.IsComplete()}";
     }
 }

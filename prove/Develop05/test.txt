@@ -1,0 +1,5 @@
+170
+Simple Goal:gggg,gggggggggggg,10,True
+Simple Goal:ffffffffffff,fffffffffffffffffff,20,True
+Eternal Goal:jjjj,jjjjjjjjjjjjjjjjj,50
+Checklist Goal:ttttt,ttttttttttttttttttttt,30,500,3,3

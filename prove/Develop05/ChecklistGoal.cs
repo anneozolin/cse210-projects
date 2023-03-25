@@ -1,65 +1,44 @@
+using static System.Console;
+using System.IO;
+
 public class ChecklistGoal : Goal
 {
-
-    protected int _extrapoints;
-
-     protected int _bonus;
-
-     protected int _done;
-
-    public ChecklistGoal()
+    private int _target = 0;
+    protected int _times = 0;
+    protected int _bonus = 0;
+    
+    public ChecklistGoal() 
+    : base()
     {
-        
+        Write("How many times does this goal need to be accomplished for a bonus? ");
+        _target = int.Parse(ReadLine());
+        Write("What is the bonus for accomplishing that many times? ");
+        _bonus = int.Parse(ReadLine());
+    }
+
+    public ChecklistGoal(string name, string description, int target, int times)
+    : base(name, description)
+    {
 
     }
 
-     public override void GetGoal()
+    public override void GetGoalList1(int number) 
     {
-         Console.WriteLine("What is the name of your goal?");
-        _name = Console.ReadLine();
-        Console.WriteLine("What is a short description of it?");
-        _description = Console.ReadLine();
-        Console.WriteLine("What is the amount of points associated with this goal");
-        _points = int.Parse(Console.ReadLine());
-        Console.WriteLine("How many times does this goal need to be accomplish for a bonus");
-        _bonus = int.Parse(Console.ReadLine());
-        Console.WriteLine("What is the bonus for acomplishing it that many times");
-        _extrapoints = int.Parse(Console.ReadLine());
-
+        string mark_X = "";
+        if (base._completed)
+        mark_X = "X";
+        WriteLine ($"{number}. [{mark_X}] {base._name} ({base._description}) --- Currently completed {this._times}/{this._target}");
     }
 
-    public override void PrintGoal()
-
+    public override void RecordEvent() 
     {
-          {
-           if (_check == false)
-        {
-            Console.Write("[]");
-        }
-        else
-        {
-            Console.Write("[x]");
-            
-        }
-        Console.WriteLine($" {_check} {_name} ({_description}) --- Currently completed: {_done}/{_bonus} ");
-         }
+        this._times++;
+        if (this._times == this._target)
+        base._completed = true;
     }
 
-    public override string SaveFile()
+    public override string SaveGoal() 
     {
-        return $" Checklist Goal - {_name} - {_description} - {_points} - {_extrapoints} - {_bonus}";
-    }
-
-    public override void RecordEvent()
-    {
-         _answer = int.Parse(Console.ReadLine());
-        if (_answer == 3)
-        {   
-            _check = true;
-            _totalPoints += _points;
-            Console.WriteLine($"Congratulations you earned {_points} points");
-            
-
-        }
+        return $"Checklist Goal:{base._name},{base._description},{base._points},{this._bonus},{this._times},{this._target}";
     }
 }

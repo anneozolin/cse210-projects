@@ -1,18 +1,16 @@
-public class Goal
+using static System.Console;
+using System.IO;
+
+public abstract class Goal
 {
+    
+    
     protected string _name;
-
     protected string _description;
+    protected int _points = 0;
+    protected bool _completed = false;
 
-    protected int _points;
-
-    protected int _totalPoints;
-
-    protected bool _check;
-
-    protected int _answer;
-
-      public virtual void GetGoal()
+    public Goal()
     {
          Console.WriteLine("What is the name of your goal?");
         _name = Console.ReadLine();
@@ -20,65 +18,40 @@ public class Goal
         _description = Console.ReadLine();
         Console.WriteLine("What is the amount of points associated with this goal");
         _points = int.Parse(Console.ReadLine());
-        
     }
 
-    public  virtual void PrintGoal()
+    public Goal(string name, string description, int points)
     {
-           if (_check == false)
-        {
-            Console.Write("[]");
-        }
-        else
-        {
-            Console.Write("[x]");
-            
-        }
-        Console.WriteLine ($"{_check } {_name} ({_description}) ");
-
     }
 
-    public void GetTotalPoints()
+    public Goal(string name, string description)
     {
-        Console.WriteLine($"You have {_totalPoints}");
     }
-
-
-    public virtual void Record()
+    public int GetPoints()
     {
-        Console.WriteLine($"{_name}");
+        return this._points;
     }
 
-
-     public virtual void RecordEvent()
+    public virtual void RecordEvent()
     {
-        _answer = int.Parse(Console.ReadLine());
-        if (_answer == 1)
-        {   
-            _check = true;
-            _totalPoints += _points;
-            Console.WriteLine($"Congratulations you earned {_points} points");
-
-
-        }
+        this._completed = true;
     }
 
-
-    public virtual void LoadFile()
+    public virtual bool IsComplete()
     {
-
+        return this._completed = true;
     }
 
-    public virtual string SaveFile()
+    public virtual void GetGoalList1(int number)
     {
-        
-        return $"{_name} {_description} {_points} ";
+        WriteLine($"{number}. [ ] {this._name} ({this._description})"); 
     }
-
-
-    public virtual bool Iscomplete()
+    public virtual void GetGoalList2(int number)
     {
-        return true;
+        WriteLine($"{number}. {this._name}"); 
     }
-
+    public virtual string SaveGoal() 
+    {
+        return $"{_name},{_description},{_points},{_completed}";
+    }
 }

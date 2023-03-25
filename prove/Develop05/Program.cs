@@ -4,103 +4,109 @@ class Program
 {
     static void Main(string[] args)
     {
-        int opcion = 0;
-        SimpleGoal Sgoal = new SimpleGoal();
-        EternalGoal EGoal = new EternalGoal();
-        ChecklistGoal CGoal = new ChecklistGoal();
         List<Goal> goals = new List<Goal>();
-        while (opcion !=6)
+        int points = 0;
+
+        Console.WriteLine($"You have 0 points\n");
+        int option = 0;
+        while (option != 6)
         {
-                Console.WriteLine("Menu options:\n"+
-                "\n1.Create a new goal"+
-                "\n2.List goals"+
-                "\n3.Save goals"+
-                "\n4.Load Goals"+
-                "\n5.Record Events"+
-                "\n6.Quit");
-                opcion = int.Parse(Console.ReadLine());
-                switch(opcion){
+            Console.WriteLine("Menu Options:");
+            Console.WriteLine("  1. Create New Goal");
+            Console.WriteLine("  2. List Goals");
+            Console.WriteLine("  3. Save Goals");
+            Console.WriteLine("  4. Load Goals");
+            Console.WriteLine("  5. Record Event");
+            Console.WriteLine("  6. Return");
+            Console.WriteLine("Select a choice from the menu: ");
+            option = int.Parse(Console.ReadLine());
 
-                            case 1: // Create New Goal
-                            int answer = 0;
-                             Console.WriteLine(" Wich type of goal would you like to create? \n"+
-                                "\n1.Simple Goal"+
-                                "\n2.Eternal Goal"+
-                                "\n3.Checklist Goal");
-                                answer = int.Parse(Console.ReadLine());
-                                switch(answer)
-                                {
-                                    case 1: // Simple goal 
-                                    Sgoal.GetGoal();
-                                    goals.Add(Sgoal);
-                                        break;
+            switch (option)
+            {
+                case 1: // Create New Goal
+                    int goalOption = 0;
+                    Console.WriteLine("The types of Goals are:");
+                    Console.WriteLine("  1. Simple Goal");   
+                    Console.WriteLine("  2. Eternal Goal");   
+                    Console.WriteLine("  3. Checklist Goal");
+                    Console.WriteLine("Which type of goal would you like to create ");
+                    goalOption = int.Parse(Console.ReadLine());
 
-                                    case 2: // Eternal Goal
-                                    EGoal.GetGoal();
-                                    goals.Add(EGoal);
-                                        break;
+                    switch (goalOption)
+                    {
+                        case 1: // Simple goal
+                            var sGoal = new SimpleGoal();
+                            goals.Add(sGoal);
+                            Console.WriteLine($"\nYou have {0} points.\n");
+                        break;
 
-                                    case 3: //Checklist Goal
-                                    CGoal.GetGoal();
-                                    goals.Add(CGoal);
-                                        break;
+                        case 2: // Eternal goal
+                            var eGoal = new EternalGoal();
+                            goals.Add(eGoal);
+                            Console.WriteLine($"\nYou have {0} points.\n");
+                        break;
 
-                                    default:
-                                        Console.Write("Please enter a valid choice:\n");
-                                        break;
-                                }
-
-                                break;
-                            case 2: // List goals
-                            int i = 0;
-                            Console.WriteLine("\nThe Goals are:");
-                            foreach (Goal goal in goals)
-                            {
-                                i++;
-                                goal.PrintGoal();
-                            }
-                            //Console.WriteLine($"\nYou have {_points} points\n");
-                
-                          
-
-                                break;
-                            case 3: //Save goals
-                                Console.WriteLine("Enter a file Name with a file extension (txt)");
-                                    string fileName =  Console.ReadLine();
-
-                                    using (StreamWriter outputFile = new StreamWriter(fileName))
-                                    {
-                                    foreach(Goal x in goals)
-                                    {
-                                        
-                                        outputFile.WriteLine(x.SaveFile());
-                                    }
-                                    }
-                                break;
-                            case 4: // Load Goals
-                             {
-
-                             }
-                                break;
-                            case 5: // Record Events
-                                Console.WriteLine("The goals are:");
-                              foreach (Goal i in goals)
-                            {
-                                i.Record();
-                            }
-                                Console.WriteLine(" Wich goal did you acomplish?");
-                                Sgoal.RecordEvent();
-                                EGoal.RecordEvent();
-                                CGoal.RecordEvent();
-                                break;
-                            case 6:
-                                Console.WriteLine("Goodbye");
-                                break;
-                            default:
-                                Console.Write("Please enter a valid choice:\n");
-                                break;
-
+                        case 3: // Checklist goal
+                            var cGoal = new ChecklistGoal();
+                            goals.Add(cGoal);
+                            Console.WriteLine($"\nYou have {0} points.\n");
+                        break;
+                        
+                        default:
+                        break;
                     }
+
+                break;
+
+                case 2: // List Goals
+                    int i = 0;
+                    Console.WriteLine("\nThe Goals are:");
+                    foreach (Goal goal in goals)
+                    {
+                        i++;
+                        goal.GetGoalList1(i);
+                    }
+                    Console.WriteLine($"\nYou have {points} points\n");
+                break;
+
+                case 3: // Save Goals
+                    var saveGoal = new SaveLoad();
+                    saveGoal.SaveGoal(goals, points);
+                    Console.WriteLine($"\nYou have {points} points\n");
+                break;
+
+                case 4: // Load Goals
+                    var loadGoal = new SaveLoad();
+                    loadGoal.LoadGoal();
+                    goals = loadGoal.GetGoal();
+                    points = loadGoal.GetPoints();
+                    Console.WriteLine($"\nYou have {points} points\n");
+                break;
+
+                case 5: // Record Event.
+                    int j = 0;
+                    Console.WriteLine("\nThe Goals are:");
+                    foreach (Goal goal in goals)
+                    {
+                        j++;
+                        goal.GetGoalList2(j);   
+                    }
+                    Console.WriteLine($"Which goal did you accomplish? ");
+                    int type2 = int.Parse(Console.ReadLine());
+
+                    Goal typeGoal = goals[type2 - 1];
+                    typeGoal.RecordEvent();
+
+                    points = points + typeGoal.GetPoints();
+                    Console.WriteLine($"Congratulations you have earned {typeGoal.GetPoints()} points.");
+                    Console.WriteLine($"\nYou have {points} points");
+                    Console.WriteLine();
+                break;  
+
+                default: // Quit program.
+                    Console.Clear();
+                break;
+            }
         }
     }
 }
