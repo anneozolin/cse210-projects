@@ -3,13 +3,11 @@ using System.IO;
 
 public class SimpleGoal : Goal
 {
-    public SimpleGoal() 
-    : base()
+    public SimpleGoal() : base()
     {
     }
 
-    public SimpleGoal(string name, string description)
-    : base(name, description)
+    public SimpleGoal(string name, string description) : base(name, description)
     {
 
     }
@@ -19,12 +17,12 @@ public class SimpleGoal : Goal
         base._completed = true;
     }
 
-    public override void GetGoalList1(int number)
+    public override void GetGoalListCheckbox(int number)
     {
-        string mark_X = "";
+        string checkbox = "";
         if (base._completed)
-        mark_X = "X";
-        WriteLine($"{number}. [{mark_X}] {base._name} ({base._description})");
+        checkbox = "X";
+        WriteLine($"{number}. [{checkbox}] {base._name} ({base._description})");
     }
 
     public override string SaveGoal() 

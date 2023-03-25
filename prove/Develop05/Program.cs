@@ -64,7 +64,7 @@ class Program
                     foreach (Goal goal in goals)
                     {
                         i++;
-                        goal.GetGoalList1(i);
+                        goal.GetGoalListCheckbox(i);
                     }
                     Console.WriteLine($"\nYou have {points} points\n");
                 break;
@@ -89,7 +89,7 @@ class Program
                     foreach (Goal goal in goals)
                     {
                         j++;
-                        goal.GetGoalList2(j);   
+                        goal.GetGoalList(j);   
                     }
                     Console.WriteLine($"Which goal did you accomplish? ");
                     int type2 = int.Parse(Console.ReadLine());

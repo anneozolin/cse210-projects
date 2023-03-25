@@ -19,15 +19,16 @@ public class ChecklistGoal : Goal
     public ChecklistGoal(string name, string description, int target, int times)
     : base(name, description)
     {
-
+        this._target = target;
+        this._times = times;
     }
 
-    public override void GetGoalList1(int number) 
+    public override void GetGoalListCheckbox(int number) 
     {
-        string mark_X = "";
+        string checkbox = "";
         if (base._completed)
-        mark_X = "X";
-        WriteLine ($"{number}. [{mark_X}] {base._name} ({base._description}) --- Currently completed {this._times}/{this._target}");
+        checkbox = "X";
+        WriteLine ($"{number}. [{checkbox}] {base._name} ({base._description}) --- Currently completed {this._times}/{this._target}");
     }
 
     public override void RecordEvent() 

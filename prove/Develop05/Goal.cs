@@ -22,11 +22,18 @@ public abstract class Goal
 
     public Goal(string name, string description, int points)
     {
+        _name = name;
+        _description = description;
+        _points = points;
     }
 
     public Goal(string name, string description)
     {
+        _name = name;
+       _description = description;
+
     }
+    
     public int GetPoints()
     {
         return this._points;
@@ -42,11 +49,11 @@ public abstract class Goal
         return this._completed = true;
     }
 
-    public virtual void GetGoalList1(int number)
+    public virtual void GetGoalListCheckbox(int number)
     {
         WriteLine($"{number}. [ ] {this._name} ({this._description})"); 
     }
-    public virtual void GetGoalList2(int number)
+    public virtual void GetGoalList(int number)
     {
         WriteLine($"{number}. {this._name}"); 
     }
